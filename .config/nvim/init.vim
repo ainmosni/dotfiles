@@ -111,6 +111,11 @@ call plug#begin(stdpath('data') . '/plugged')
     " Vim go
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+    " deoplete
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    let g:deoplete#enable_at_startup = 1
+
 " Initialise all plugins.
 call plug#end()
 autocmd vimenter * ++nested colorscheme gruvbox
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
