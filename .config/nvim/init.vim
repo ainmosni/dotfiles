@@ -212,6 +212,7 @@ call plug#begin(stdpath('data') . '/plugged')
 " deoplete and snippets {{{
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'Shougo/neosnippet.vim'
+    Plug 'Shougo/neosnippet-snippets'
 
     let g:deoplete#enable_at_startup = 1
     imap <C-k>     <Plug>(neosnippet_expand_or_jump)
