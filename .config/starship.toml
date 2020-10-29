@@ -1,0 +1,6 @@
+[kubernetes]
+disabled = false
+style = "bold blue"
+
+[time]
+disabled = false
