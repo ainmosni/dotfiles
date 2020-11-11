@@ -10,6 +10,7 @@
   "diagnostic.messageDelay": 0,
   "diagnostic.checkCurrentLine": true,
   "diagnostic.format": "%message",
+  "yaml.format.enable": true,
   "languageserver": {
     "golang": {
       "command": "gopls",
