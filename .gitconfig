@@ -1,5 +1,7 @@
 [init]
 	defaultBranch = main
+[core]
+    editor = nvim
 [include]
 	# Local gitconfig
 	path = ~/.gitconfig-local

@@ -92,6 +92,7 @@ call plug#begin(stdpath('data') . '/plugged')
     " Relative line numbering.
     set number relativenumber
     set nu rnu
+    set guifont="Fira Code:h11"
 
     set wrap
     set wrapmargin=8
@@ -100,7 +101,7 @@ call plug#begin(stdpath('data') . '/plugged')
     set autoindent
     set ttyfast
     set diffopt+=vertical,iwhite,internal,algorithm:patience,hiddenoff
-	set laststatus=2
+    set laststatus=2
     set so=7
     set wildmenu
     set hidden
@@ -211,22 +212,30 @@ call plug#begin(stdpath('data') . '/plugged')
 
 " deoplete and snippets {{{
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'Shougo/neosnippet.vim'
-    Plug 'Shougo/neosnippet-snippets'
+    " Plug 'Shougo/neosnippet.vim'
+    " Plug 'Shougo/neosnippet-snippets'
 
     let g:deoplete#enable_at_startup = 1
-    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-    " SuperTab like snippets behavior.
-    " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-    imap <expr><TAB>
+    inoremap <silent><expr> <TAB>
     \ pumvisible() ? "\<C-n>" :
-    \ neosnippet#expandable_or_jumpable() ?
-    \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ deoplete#manual_complete()
+    function! s:check_back_space() abort "{{{
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+    endfunction"}}}
+    " imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    " smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    " xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+    " " SuperTab like snippets behavior.
+    " " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+    " imap <expr><TAB>
+    " \ pumvisible() ? "\<C-n>" :
+    " \ neosnippet#expandable_or_jumpable() ?
+    " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    " smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    " \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 " }}}
 
 " General functionality {{{
