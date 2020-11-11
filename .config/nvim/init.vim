@@ -198,45 +198,97 @@ call plug#begin(stdpath('data') . '/plugged')
 " }}}
 
 " Vim go {{{
-    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     
-    " Go settings settings
-    let g:go_fmt_command = 'goimports'
-    let g:go_imports_autosave = 1
-    let g:go_metalinter_autosave = 1
-    let g:go_term_enabled = 1
-    let g:go_gopls_use_placeholders = 1
-    let g:go_addtags_skip_unexported = 0
-    let g:go_highlight_string_spellcheck = 1
+    " " Go settings settings
+    " let g:go_fmt_command = 'goimports'
+    " let g:go_imports_autosave = 1
+    " let g:go_metalinter_autosave = 1
+    " let g:go_term_enabled = 1
+    " let g:go_gopls_use_placeholders = 1
+    " let g:go_addtags_skip_unexported = 0
+    " let g:go_highlight_string_spellcheck = 1
 " }}}
 
-" deoplete and snippets {{{
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    " Plug 'Shougo/neosnippet.vim'
-    " Plug 'Shougo/neosnippet-snippets'
+" CoC autocomplete {{{
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-    let g:deoplete#enable_at_startup = 1
-    inoremap <silent><expr> <TAB>
-    \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ deoplete#manual_complete()
-    function! s:check_back_space() abort "{{{
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-    endfunction"}}}
-    " imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    " smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    " xmap <C-k>     <Plug>(neosnippet_expand_target)
+    let g:coc_global_extensions = [
+                \ 'coc-json',
+                \ 'coc-yaml',
+                \ 'coc-go',
+                \ 'coc-snippets',
+                \ 'coc-git',
+                \ ]
 
-    " " SuperTab like snippets behavior.
-    " " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-    " imap <expr><TAB>
-    " \ pumvisible() ? "\<C-n>" :
-    " \ neosnippet#expandable_or_jumpable() ?
-    " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-    " smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    " \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-" }}}
+
+        " coc-git
+        nmap [g <Plug>(coc-git-prevchunk)
+        nmap ]g <Plug>(coc-git-nextchunk)
+        nmap gs <Plug>(coc-git-chunkinfo)
+        nmap gu :CocCommand git.chunkUndo<cr>
+
+        nmap <silent> <leader>k :CocCommand explorer<cr>
+
+        "remap keys for gotos
+        nmap <silent> <leader>d <Plug>(coc-definition)
+        nmap <silent> <leader>y <Plug>(coc-type-definition)
+        nmap <silent> <leader>i <Plug>(coc-implementation)
+        nmap <silent> <leader>r <Plug>(coc-references)
+        nmap <silent> <leader>h <Plug>(coc-doHover)
+
+        " diagnostics navigation
+        nmap <silent> [c <Plug>(coc-diagnostic-prev)
+        nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+        " rename
+        nmap <silent> <leader>c <Plug>(coc-rename)
+
+        " Remap for format selected region
+        xmap <leader>f  <Plug>(coc-format-selected)
+        nmap <leader>f  <Plug>(coc-format-selected)
+
+        " organize imports
+        command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
+
+        " Use K to show documentation in preview window
+        nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+        function! s:show_documentation()
+            if (index(['vim','help'], &filetype) >= 0)
+                execute 'h '.expand('<cword>')
+            else
+                call CocAction('doHover')
+            endif
+        endfunction
+
+        "tab completion
+        inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+        inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+        function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~# '\s'
+        endfunction
+
+        " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+        " position. Coc only does snippet and additional edit on confirm.
+        if exists('*complete_info')
+            inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+        else
+            imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+        endif
+
+        " For enhanced <CR> experience with coc-pairs checkout :h coc#on_enter()
+        inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+    " }}}
+
+    
+
 
 " General functionality {{{
     " Comment motion commands (`gc`)
@@ -385,4 +437,3 @@ call plug#begin(stdpath('data') . '/plugged')
 " Initialise all plug ins.
 call plug#end()
 autocmd vimenter * ++nested colorscheme gruvbox
-call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
