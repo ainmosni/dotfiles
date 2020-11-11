@@ -25,3 +25,12 @@ endfunction
 function! helpers#lightline#gitBranch()
     return "\uE725" . (exists('*fugitive#head') ? ' ' . fugitive#head() : '')
 endfunction
+
+function! helpers#lightline#currentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
+function! helpers#lightline#gitBlame()
+    return winwidth(0) > 100 ? strpart(substitute(get(b:, 'coc_git_blame', ''), '[\(\)]', '', 'g'), 0, 50) : ''
+    " return winwidth(0) > 100 ? strpart(get(b:, 'coc_git_blame', ''), 0, 20) : ''
+endfunction

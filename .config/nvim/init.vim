@@ -168,7 +168,7 @@ call plug#begin(stdpath('data') . '/plugged')
                 \               [ 'readonly', 'filetype', 'filename' ]],
                 \       'right': [ [ 'percent' ], [ 'lineinfo' ],
                 \               [ 'fileformat', 'fileencoding' ],
-                \               [ 'cocstatus', 'linter_errors', 'linter_warnings' ]]
+                \               [ 'gitblame', 'currentfunction', 'cocstatus', 'linter_errors', 'linter_warnings' ]]
                 \   },
                 \   'component_expand': {
                 \   },
@@ -183,6 +183,9 @@ call plug#begin(stdpath('data') . '/plugged')
                 \       'fileformat': 'helpers#lightline#fileFormat',
                 \       'filetype': 'helpers#lightline#fileType',
                 \       'gitbranch': 'helpers#lightline#gitBranch',
+                \       'cocstatus': 'coc#status',
+                \       'currentfunction': 'helpers#lightline#currentFunction',
+                \       'gitblame': 'helpers#lightline#gitFlame',
                 \   },
                 \   'tabline': {
                 \       'left': [ [ 'tabs' ] ],
@@ -198,16 +201,17 @@ call plug#begin(stdpath('data') . '/plugged')
 " }}}
 
 " Vim go {{{
-    " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     
-    " " Go settings settings
-    " let g:go_fmt_command = 'goimports'
-    " let g:go_imports_autosave = 1
-    " let g:go_metalinter_autosave = 1
-    " let g:go_term_enabled = 1
-    " let g:go_gopls_use_placeholders = 1
-    " let g:go_addtags_skip_unexported = 0
-    " let g:go_highlight_string_spellcheck = 1
+    " Go settings settings
+    let g:go_fmt_command = 'goimports'
+    let g:go_imports_autosave = 1
+    let g:go_metalinter_autosave = 1
+    let g:go_term_enabled = 1
+    let g:go_gopls_use_placeholders = 1
+    let g:go_addtags_skip_unexported = 0
+    let g:go_highlight_string_spellcheck = 1
+    let g:go_def_mapping_enabled = 0
 " }}}
 
 " CoC autocomplete {{{
@@ -231,11 +235,11 @@ call plug#begin(stdpath('data') . '/plugged')
         nmap <silent> <leader>k :CocCommand explorer<cr>
 
         "remap keys for gotos
-        nmap <silent> <leader>d <Plug>(coc-definition)
-        nmap <silent> <leader>y <Plug>(coc-type-definition)
-        nmap <silent> <leader>i <Plug>(coc-implementation)
-        nmap <silent> <leader>r <Plug>(coc-references)
-        nmap <silent> <leader>h <Plug>(coc-doHover)
+        nmap <silent> gd <Plug>(coc-definition)
+        nmap <silent> gy <Plug>(coc-type-definition)
+        nmap <silent> gi <Plug>(coc-implementation)
+        nmap <silent> gr <Plug>(coc-references)
+        nmap <silent> gh <Plug>(coc-doHover)
 
         " diagnostics navigation
         nmap <silent> [c <Plug>(coc-diagnostic-prev)
