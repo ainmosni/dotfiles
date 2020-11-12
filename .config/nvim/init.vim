@@ -333,6 +333,7 @@ call plug#begin(stdpath('data') . '/plugged')
         " Custom startup list, only show MRU from current directory/project
         let g:startify_lists = [
         \  { 'type': 'dir',       'header': [ 'Files '. getcwd() ] },
+        \  { 'type': function('helpers#startify#listcommits'), 'header': [ 'Recent Commits' ] },
         \  { 'type': 'sessions',  'header': [ 'Sessions' ]       },
         \  { 'type': 'bookmarks', 'header': [ 'Bookmarks' ]      },
         \  { 'type': 'commands',  'header': [ 'Commands' ]       },
