@@ -176,19 +176,19 @@ get_yay()
     cd $yaydir
     curl -L https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz | tar xzvf -
     cd yay
-    makepkg -si
-    pacman -U yay-*.tar.zst
+    makepkg -si --noconfirm
+    pacman --noconfirm -U yay-*.tar.zst
     cd $curdir
 }
 
 install_arch_dependencies()
 {
     info "Installing Arch prerequisites."
-    sudo pacman -Syu
-    sudo pacman -S base-devel curl
+    sudo pacman -Syu --noconfirm
+    sudo pacman -S --noconfirm base-devel curl
     get_yay
     info "Installing Arch dependencies."
-    yay -S \
+    yay -S --noconfirm \
         ccid \
         fish \
         fzf \
@@ -211,7 +211,7 @@ install_arch_dependencies()
 install_arch_gui_dependencies()
 {
     info "Installing Arch GUI dependencies."
-    yay -S \
+    yay -S --noconfirm \
         enpass-bin \
         firefox \
         gdm \
