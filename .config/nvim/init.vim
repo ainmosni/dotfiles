@@ -437,6 +437,10 @@ call plug#begin(stdpath('data') . '/plugged')
         Plug 'ekalinin/Dockerfile.vim'
     " }}}
 
+    " Auto Pairs {{{
+        Plug 'jiangmiao/auto-pairs'
+    " }}}
+
 
 
 " Initialise all plug ins.
