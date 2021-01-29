@@ -440,7 +440,14 @@ call plug#begin(stdpath('data') . '/plugged')
     " Auto Pairs {{{
         Plug 'jiangmiao/auto-pairs'
     " }}}
-
+    
+    " Tmux navigation {{{
+        Plug 'christoomey/vim-tmux-navigator'
+    " }}}
+    
+    " Jsonnet {{
+        Plug 'google/vim-jsonnet'
+    " }}
 
 
 " Initialise all plug ins.
