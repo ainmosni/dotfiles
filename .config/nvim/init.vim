@@ -448,7 +448,10 @@ call plug#begin(stdpath('data') . '/plugged')
     " Jsonnet {{
         Plug 'google/vim-jsonnet'
     " }}
-
+    
+    " fish {{
+        Plug 'dag/vim-fish'
+    " }}
 
 " Initialise all plug ins.
 call plug#end()
