@@ -174,10 +174,10 @@ get_yay()
     curdir=$(pwd)
     yaydir=$(mktemp -d)
     cd $yaydir
-    curl -L https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz | tar xzvf -
-    cd yay
+    curl -L https://aur.archlinux.org/cgit/aur.git/snapshot/paru.tar.gz | tar xzvf -
+    cd paru
     makepkg -si --noconfirm
-    pacman --noconfirm -U yay-*.tar.zst
+    pacman --noconfirm -U paru-*.tar.zst
     cd $curdir
 }
 
