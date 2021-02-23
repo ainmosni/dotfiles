@@ -28,3 +28,5 @@
     branch = yellow
 [commit]
     gpgsign = true
+[alias]
+	root = rev-parse --show-toplevel

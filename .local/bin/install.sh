@@ -168,12 +168,12 @@ install_ubuntu_gui_dependencies()
     sudo snap install --candidate  termite
 }
 
-get_yay()
+get_paru()
 {
-    info "Installing yay"
+    info "Installing paru"
     curdir=$(pwd)
-    yaydir=$(mktemp -d)
-    cd $yaydir
+    parudir=$(mktemp -d)
+    cd $parudir
     curl -L https://aur.archlinux.org/cgit/aur.git/snapshot/paru.tar.gz | tar xzvf -
     cd paru
     makepkg -si --noconfirm
@@ -186,9 +186,9 @@ install_arch_dependencies()
     info "Installing Arch prerequisites."
     sudo pacman -Syu --noconfirm
     sudo pacman -S --noconfirm base-devel curl
-    get_yay
+    get_paru
     info "Installing Arch dependencies."
-    yay -S --noconfirm \
+    paru -S --noconfirm \
         ccid \
         fish \
         fzf \
@@ -211,7 +211,7 @@ install_arch_dependencies()
 install_arch_gui_dependencies()
 {
     info "Installing Arch GUI dependencies."
-    yay -S --noconfirm \
+    paru -S --noconfirm \
         enpass-bin \
         firefox \
         gdm \
