@@ -9,7 +9,7 @@
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 
-set $lock ~/.local/bin/lock.sh
+set $lock swaylock -f --screenshots --clock --fade-in 2 --effect-blur 7x5
 
 # Home row direction keys, like vim
 set $left h
@@ -33,7 +33,6 @@ font pango:Fira Sans 10
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # Example configuration:
 #
@@ -46,7 +45,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 ### Idle configuration
 exec swayidle -w \
          timeout 300 'exec $lock' \
-         timeout 600 'swaymsg "output * dpms off"' \
+	 timeout 600 'systemctl suspend' \
          resume 'swaymsg "output * dpms on"' \
          after-resume 'swaymsg "output * dpms on"' \
          before-sleep 'exec $lock'
@@ -75,7 +74,6 @@ input "type:keyboard" {
 # Autostart
 #
 exec --no-startup-id mako
-exec --no-startup-id /home/dfranke/.local/bin/wallpaper.sh
 exec --no-startup-id insync start
 
 #
@@ -203,7 +201,9 @@ exec --no-startup-id insync start
     # Move focus to the parent container
     bindsym $mod+a focus parent
 
-    bindsym $mod+Shift+w move workspace to output right
+    bindsym $mod+Shift+. move workspace to output right
+    bindsym $mod+Shift+, move workspace to output left
+
     bindsym $mod+Shift+x move container to output right
 #
 # Scratchpad:
@@ -301,3 +301,4 @@ bar {
 
 include ~/.config/sway/config.d/*
 
+exec setrandom /home/dfranke/Drive/Wallpapers/
