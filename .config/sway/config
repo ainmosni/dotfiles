@@ -21,7 +21,7 @@ set $term termite
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.nodes[]?, .floating_nodes[]?) | .focused] | any) | index(true)') - 1) -show drun -run-command 'swaymsg exec -- {cmd}'
+set $menu wofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.nodes[]?, .floating_nodes[]?) | .focused] | any) | index(true)') - 1) --show drun
 set $power ~/.config/rofi/modi/power
 set $wifi ~/.config/rofi/modi/nmcli
 
@@ -201,10 +201,10 @@ exec --no-startup-id insync start
     # Move focus to the parent container
     bindsym $mod+a focus parent
 
-    bindsym $mod+Shift+. move workspace to output right
-    bindsym $mod+Shift+, move workspace to output left
+    bindsym $mod+Shift+x move workspace to output right
+    bindsym $mod+Shift+z move workspace to output left
 
-    bindsym $mod+Shift+x move container to output right
+    bindsym $mod+Shift+a move container to output right
 #
 # Scratchpad:
 #
@@ -302,3 +302,4 @@ bar {
 include ~/.config/sway/config.d/*
 
 exec setrandom /home/dfranke/Drive/Wallpapers/
+exec nm-applet --indicator
