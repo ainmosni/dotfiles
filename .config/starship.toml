@@ -1,6 +1,6 @@
 [kubernetes]
 disabled = false
-style = "bold blue"
+style = "bold red"
 
 [time]
 disabled = false

@@ -8,6 +8,6 @@ if (("$procs" > 1)); then
 fi
 
 while true; do
-    setrandom /home/dfranke/Drive/Wallpapers
-    sleep 300
+    setrandom /home/daniel/Drive/Wallpapers
+    sleep $(expr 3600 \* 4)
 done

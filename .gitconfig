@@ -2,31 +2,40 @@
 	defaultBranch = main
 [core]
     editor = nvim
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
 [include]
 	# Local gitconfig
 	path = ~/.gitconfig-local
-[color]
-    diff = auto
-    status = auto
-    branch = auto
-    interactive = auto
-    ui = auto
-[color "branch"]
-    current = green bold
-    local = green
-    remote = red bold
-[color "diff"]
-    meta = yellow bold
-    frag = magenta bold
-    old = red bold
-    new = green bold
-[color "status"]
-    added = green bold
-    changed = yellow bold
-    untracked = red
-[color "sh"]
-    branch = yellow
 [commit]
     gpgsign = true
 [alias]
-	root = rev-parse --show-toplevel
+    root = rev-parse --show-toplevel
+    nb = checkout -b
+    rebase-main = !git fetch && git rebase origin/main
+    rebase-master = !git fetch && git rebase origin/master
+[push]
+	default = current
+[pull]
+	rebase = true
+[delta]
+    navigate = true
+    side-by-side = true
+    features = side-by-side line-numbers decorations
+    syntax-theme = Dracula
+
+[delta "interactive"]
+    keep-plus-minus-markers = false
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    hunk-header-decoration-style = cyan box ul
+    file-decoration-style = none
+[delta "line-numbers"]
+    line-numbers-left-style = cyan
+    line-numbers-right-style = cyan
+    line-numbers-minus-style = 124
+    line-numbers-plus-style = 28
+

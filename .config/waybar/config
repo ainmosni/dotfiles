@@ -3,10 +3,9 @@
     "position": "top",
     "height": 30,
 
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-right": ["tray", "custom/spotify", "custom/weather",
-    "custom/mail", "cpu", "memory", "custom/storage", "backlight", "pulseaudio", "network", "idle_inhibitor", "battery", "clock",],
+    "cpu", "memory", "custom/storage", "backlight", "pulseaudio", "network", "idle_inhibitor", "battery", "clock",],
     "sway/mode": {
         "format": " {}"
     },
@@ -26,7 +25,8 @@
         "format": "{capacity}% {icon}",
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""],
-        "format-charging": "{capacity}% ",
+        "format-charging": "{capacity}% {icon}🔌",
+        "format-full": "{capacity}% {icon}🔌",
         "interval": 30,
         "states": {
             "warning": 25,
@@ -67,7 +67,7 @@
         "exec": "~/.config/waybar/modules/storage.sh"
     },
     "cpu": {
-        "format": "{usage}% 💻",
+        "format": "{usage}%💻",
     },
     "memory": {
         "format": "{used:0.1f}/{total:0.1f} GiB",
@@ -86,7 +86,7 @@
         "format-alt-click": "click-right",
         "interval": 300,
         "return-type": "json",
-        "exec": "/home/dfranke/go/bin/wayweather"
+        "exec": "/home/daniel/go/bin/wayweather"
     },
     "idle_inhibitor": {
         "format": "{icon}",
@@ -95,20 +95,6 @@
             "deactivated": ""
         },
         "tooltip": false
-    },
-    "custom/mail": {
-        "format": "{}",
-        "format-alt": "{alt}: {}",
-        "format-alt-click": "click-right",
-        "return-type": "json",
-        "interval": 120,
-        "exec": "golang-gmail-check",
-    },
-    "custom/test": {
-        "format": "{}",
-        "exec": "/tmp/test blub",
-        "param": "blah",
-        "interval": 5
     },
     "tray": {
         "icon-size": 18

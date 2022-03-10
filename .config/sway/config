@@ -9,7 +9,7 @@
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 
-set $lock swaylock -f --screenshots --clock --fade-in 2 --effect-blur 7x5
+set $lock swaylock -f --screenshots --clock --fade-in 2 --effect-blur 7x5 --effect-pixelate 5 -F
 
 # Home row direction keys, like vim
 set $left h
@@ -17,7 +17,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term termite
+set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -112,9 +112,9 @@ exec --no-startup-id insync start
     bindsym Control+Alt+Space exec makoctl dismiss --all
 
     # Multimedia
-    bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
-    bindsym --locked XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
-    bindsym --locked XF86AudioMute exec --no-startup-id pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggle
+    bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+    bindsym --locked XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+    bindsym --locked XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
     bindsym --locked XF86AudioPlay exec playerctl play-pause
     bindsym --locked XF86AudioNext exec playerctl next
     bindsym --locked XF86AudioPrev exec playerctl previous
@@ -301,5 +301,5 @@ bar {
 
 include ~/.config/sway/config.d/*
 
-exec setrandom /home/dfranke/Drive/Wallpapers/
+exec --no-startup-id ~/.local/bin/wallpaper.sh
 exec nm-applet --indicator

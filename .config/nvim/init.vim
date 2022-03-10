@@ -10,8 +10,8 @@ call plug#begin(stdpath('data') . '/plugged')
     set history=1000
     set textwidth=100
 
-    set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-    set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+    set backupdir=/tmp
+    set directory=/tmp
 
     set inccommand=nosplit
 

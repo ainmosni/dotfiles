@@ -7,7 +7,7 @@ border-size=2
 default-timeout=5000
 
 # Only for desktop, ignored when no such output exists
-output=DP-5
+output=eDP-1
 
 background-color=#231f20
 border-color=#75005c
